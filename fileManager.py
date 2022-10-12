@@ -8,11 +8,15 @@ class fileManager:
         return os.listdir(self.path)
 
     def getArchive(self, name):
-        archivePath = os.path.join(self.path, name)
-        contents = open(archivePath, "rt").read()
-        return bytearray(contents, 'utf-8')
+        filePath = os.path.join(self.path, name)
+        if os.path.exists(filePath):
+            contents = open(filePath, "rt").read()
+            return bytearray(contents, 'utf-8')
+        else: return False
 
     def deleteArchive(self, name):
-       archivePath = os.path.join(self.path, name)
-       if os.path.exists(archivePath):
-            os.remove(archivePath)
+       filePath = os.path.join(self.path, name)
+       if os.path.exists(filePath):
+            os.remove(filePath)
+            return True 
+       else: return False
